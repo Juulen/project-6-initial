@@ -51,7 +51,7 @@ public class DictionaryController {
         sw.stop();
 
         long nanoSeconds = sw.getLastTaskTimeNanos();
-        String message = new StringBuilder().append("Retrieved entries for words starting with [")
+        String message = new StringBuilder().append("Retrieved entries for words ending with [")
                 .append(value)
                 .append("] containing ")
                 .append(entry.size())
@@ -103,4 +103,26 @@ public class DictionaryController {
         logger.info(message);
         return entry;
     }
+
+    @GetMapping("/getWordsEndingWith/{value}")
+    public List<Entry> getWordsEndingWith(@PathVariable String value) {
+
+        StopWatch sw = new StopWatch();
+        sw.start();
+        List<Entry> entry = this.dictionaryService.getWordsEndingWith(value);
+        sw.stop();
+
+        long nanoSeconds = sw.getLastTaskTimeNanos();
+        String message = new StringBuilder().append("Retrieved entries for words ending with [")
+                .append(value)
+                .append("] containing ")
+                .append(entry.size())
+                .append(" entries in ")
+                .append(nanoSeconds / 1000000.0)
+                .append("ms")
+                .toString();
+        logger.info(message);
+        return entry;
+    }
+
 }
