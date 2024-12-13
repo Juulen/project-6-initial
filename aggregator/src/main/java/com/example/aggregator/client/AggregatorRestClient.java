@@ -62,7 +62,7 @@ public class AggregatorRestClient {
 
     public List<Entry> getWordsEndingWith(String chars) {
 
-        String uri = "http://localhost:9091/getWordsEndingWith/" + chars;
+        String uri = "http://localhost:9091/getAllPalindromes";
 
         ResponseEntity<Entry[]> responseEntity = restTemplate.getForEntity(uri, Entry[].class);
         Entry[] entryArray = responseEntity.getBody();
@@ -70,6 +70,7 @@ public class AggregatorRestClient {
         return Arrays.stream(entryArray)
                 .collect(Collectors.toList());
     }
+
 
 
 
